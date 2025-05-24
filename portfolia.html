@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Rahitya | Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet"/>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(120deg, #141e30, #243b55);
+      color: #f9f9f9;
+      min-height: 100vh;
+      display: flex;
+    }
+
+    nav {
+      width: 220px;
+      min-height: 100vh;
+      background: #1f2937;
+      padding: 2rem 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: fixed;
+      z-index: 10;
+      transition: transform 0.3s ease;
+    }
+
+    nav img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      border: 3px solid #10b981;
+      margin-bottom: 1rem;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    nav h1 {
+      font-size: 1.2rem;
+      text-align: center;
+      margin-bottom: 2rem;
+      cursor: pointer;
+    }
+
+    nav a {
+      color: #9ca3af;
+      text-decoration: none;
+      margin: 0.5rem 0;
+      font-weight: 500;
+      transition: color 0.3s;
+      font-size: 1rem;
+    }
+
+    nav a:hover {
+      color: #10b981;
+    }
+
+    main {
+      margin-left: 220px;
+      padding: 3rem 2rem;
+      flex: 1;
+      min-height: 100vh;
+    }
+
+    section {
+      margin-bottom: 3rem;
+      padding: 2rem;
+      background-color: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease;
+    }
+
+    section:hover {
+      transform: translateY(-5px);
+    }
+
+    h2 {
+      font-size: 2rem;
+      color: #10b981;
+      margin-bottom: 1rem;
+    }
+
+    .skills-grid, .certifications-grid {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    }
+
+    .card {
+      background-color: #374151;
+      padding: 1rem;
+      border-radius: 8px;
+      text-align: center;
+      color: #fff;
+      user-select: none;
+    }
+
+    .card:hover {
+      background-color: #10b981;
+      color: #000;
+    }
+
+    .certifications-grid img {
+      width: 100%;
+      border-radius: 8px;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 4rem;
+      font-size: 0.9rem;
+      color: #9ca3af;
+    }
+
+    a {
+      color: #3b82f6;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.8);
+      justify-content: center;
+      align-items: center;
+      padding: 1rem;
+    }
+
+    .modal img {
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      border: 5px solid #10b981;
+      object-fit: cover;
+      max-width: 90vw;
+      max-height: 90vh;
+    }
+
+    .modal.active {
+      display: flex;
+    }
+
+    @media (max-width: 768px) {
+      body {
+        flex-direction: column;
+      }
+      
+      nav {
+        position: fixed;
+        width: 200px;
+        height: 100vh;
+        top: 0;
+        left: 0;
+        background: #1f2937;
+        padding: 2rem 1rem;
+        transform: translateX(-220px);
+        transition: transform 0.3s ease;
+        z-index: 20;
+      }
+
+      nav.active {
+        transform: translateX(0);
+      }
+
+      main {
+        margin-left: 0;
+        padding: 1.5rem 1rem;
+      }
+
+      section {
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+      }
+
+      h2 {
+        font-size: 1.6rem;
+      }
+
+      nav img {
+        width: 80px;
+        height: 80px;
+        margin-bottom: 1rem;
+      }
+
+      nav h1 {
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+      }
+
+      nav a {
+        font-size: 1.1rem;
+        margin: 0.7rem 0;
+      }
+
+      #menuToggle {
+        position: fixed;
+        top: 1rem;
+        left: 1rem;
+        width: 35px;
+        height: 30px;
+        cursor: pointer;
+        z-index: 30;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+      }
+
+      #menuToggle div {
+        width: 35px;
+        height: 4px;
+        background-color: #10b981;
+        border-radius: 2px;
+        transition: all 0.3s ease;
+      }
+
+      #menuToggle.active div:nth-child(1) {
+        transform: rotate(45deg) translate(7px, 7px);
+      }
+
+      #menuToggle.active div:nth-child(2) {
+        opacity: 0;
+      }
+
+      #menuToggle.active div:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -7px);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="menuToggle" aria-label="Toggle navigation" role="button" tabindex="0">
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+
+  <nav id="sidebarNav">
+    <img src="images/me.jpg" alt="Rahitya Photo" id="profileImg" />
+    <h1 id="profileName">Ulapalli Devi Sai Rahitya</h1>
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#internship">Internship</a>
+    <a href="#achievements">Achievements</a>
+    <a href="#certifications">Certifications</a>
+    <a href="#education">Education</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <main>
+    <section id="about">
+      <h2>About Me</h2>
+      <p>I’m a 3rd year B.Tech student at KIET specializing in AI & Data Science. I’m part of the Robotics Lab and work with technologies like the GO2 robot dog. I enjoy problem-solving and creative pursuits like ANIME drawing. Currently learning DATA ANALYST Roadmap and Topics.</p>
+    </section>
+
+    <section id="skills">
+      <h2>Skills</h2>
+      <div class="skills-grid">
+        <div class="card">Front-End Development</div>
+        <div class="card">Python (Basics)</div>
+        <div class="card">Robot Operating System</div>
+        <div class="card">Mapping & Navigation Simulation</div>
+        <div class="card">Teamwork</div>
+        <div class="card">Soft Skills</div>
+        <div class="card">Creative Thinking</div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <h2>Projects</h2>
+      <div class="card">
+        <h3>Salary Prediction Model</h3>
+        <p>Built a machine learning model to predict salaries based on job role and experience. <a href="https://github.com/Rahitya86" target="_blank" rel="noopener noreferrer">View on GitHub</a></p>
+        <small>This project was part of my Cognifyz internship.</small>
+      </div>
+      <br/>
+      <div class="card">
+        <h3>Cognifyz Internship Project</h3>
+        <p>Completed a web development internship at Cognifyz Technologies where I worked on frontend development using HTML, CSS, and JavaScript. <a href="https://github.com/Rahitya86" target="_blank" rel="noopener noreferrer">Code on GitHub</a></p>
+      </div>
+    </section>
+
+    <section id="internship">
+      <h2>Internship</h2>
+      <div class="card">
+        <p>I completed a Web Developer internship at <strong>Cognifyz Technologies</strong>, where I enhanced my skills in frontend development and contributed to real-world projects, including the salary prediction machine learning model mentioned in my projects.</p>
+      </div>
+    </section>
+
+    <section id="achievements">
+      <h2>Achievements</h2>
+      <div class="card">
+        <p>🏆 Winner of a hackathon for a machine learning project on salary prediction based on job role and experience.</p>
+      </div>
+      <div class="card">
+        <p>🎤 Interview winner at Abhiyaan during Diploma 1st year.</p>
+      </div>
+    </section>
+
+    <section id="certifications">
+      <h2>Certifications</h2>
+      <div class="certifications-grid">
+        <div class="card"><img src="images/certificate1.jpg" alt="Accenture"/><p>Data Analytics – Accenture</p></div>
+        <div class="card"><img src="images/certificate2.jpg" alt="TCS"/><p>Career Edge – TCS iON</p></div>
+        <div class="card"><img src="images/certificate3.jpg" alt="IBM"/><p>Data Visualization with Python – IBM</p></div>
+      </div>
+    </section>
+
+    <section id="education">
+      <h2>Education</h2>
+      <div class="card">
+        <p><strong>Diploma:</strong> Completed at Kakinada Institute of Engineering and Technology (KIET) in 2024.</p>
+        <p><strong>B.Tech:</strong> Currently pursuing 3rd year B.Tech at the same institute.</p>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2>Contact</h2>
+      <p>Email: <a href="mailto:ulapallirahitya@gmail.com">ulapallirahitya@gmail.com</a></p>
+      <p>LinkedIn: <a href="https://www.linkedin.com/in/devisairahitya-ulapalli" target="_blank" rel="noopener noreferrer">My Profile</a></p>
+      <p>GitHub: <a href="https://github.com/Rahitya86" target="_blank" rel="noopener noreferrer">Explore Projects</a></p>
+    </section>
+
+    <footer>
+      <p>&copy; 2025 Ulapalli Devi Sai Rahitya. All rights reserved.</p>
+    </footer>
+  </main>
+
+  <div class="modal" id="modal" aria-hidden="true" role="dialog" aria-label="Profile Photo Modal">
+    <img src="images/me.jpg" alt="Full Profile Photo" />
+  </div>
+
+  <script>
+    const profileImg = document.getElementById('profileImg');
+    const profileName = document.getElementById('profileName');
+    const modal = document.getElementById('modal');
+    const menuToggle = document.getElementById('menuToggle');
+    const sidebarNav = document.getElementById('sidebarNav');
+
+    profileImg.addEventListener('click', () => {
+      modal.classList.add('active');
+      modal.setAttribute('aria-hidden', 'false');
+    });
+
+    profileName.addEventListener('click', () => {
+      modal.classList.add('active');
+      modal.setAttribute('aria-hidden', 'false');
+    });
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.classList.remove('active');
+        modal.setAttribute('aria-hidden', 'true');
+      }
+    });
+
+    menuToggle.addEventListener('click', () => {
+      menuToggle.classList.toggle('active');
+      sidebarNav.classList.toggle('active');
+    });
+
+    sidebarNav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        if(window.innerWidth <= 768) {
+          menuToggle.classList.remove('active');
+          sidebarNav.classList.remove('active');
+        }
+      });
+    });
+
+    menuToggle.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        menuToggle.click();
+      }
+    });
+  </script>
+</body>
+</html>
